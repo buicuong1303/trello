@@ -12,9 +12,13 @@ export default defineConfig({
     devSourcemap: true
   },
   resolve: {
-    alias: {
-      src: path.resolve(__dirname, './src')
-    }
+    // replace ~ = /src
+    alias: [
+      {
+        find: '~',
+        replacement: '/src'
+      }
+    ]
   },
   plugins: [react(), visualizer()]
 })

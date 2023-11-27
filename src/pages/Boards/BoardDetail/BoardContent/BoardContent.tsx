@@ -8,7 +8,7 @@ function BoardContent(props) {
         width: '100%',
         display: 'flex',
         alignItems: 'center',
-        height: 'calc(100vh - 48px - 58px)'
+        height: 'calc(100vh - 58px - 60px)'
       }}
     >
       Board Content

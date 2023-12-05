@@ -4,7 +4,7 @@ function BoardContent(props) {
   return (
     <Box
       sx={{
-        backgroundColor: 'primary.main',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#30495e' : '#1976d2'),
         width: '100%',
         display: 'flex',
         alignItems: 'center',

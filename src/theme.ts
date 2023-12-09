@@ -1,6 +1,8 @@
-import { teal, deepOrange, cyan, orange } from '@mui/material/colors'
 //prevent dark mode SSG flicking
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
+export const COLUMN_HEADER_HEIGHT = '50px'
+export const COLUMN_FOOTER_HEIGHT = '56px'
+export const BOARD_CONTENT_HEIGHT = 'calc(100vh - 58px - 60px)'
 const theme = extendTheme({
   colorSchemes: {
     // light: {
@@ -36,6 +38,16 @@ const theme = extendTheme({
         root: {
           // color: theme.palette.primary.main,
           fontSize: '0.875rem'
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          // color: theme.palette.primary.main,
+          '&.MuiTypography-body1': {
+            fontSize: '0.875rem'
+          }
         }
       }
     },

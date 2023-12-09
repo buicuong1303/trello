@@ -10,7 +10,7 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Tooltip from '@mui/material/Tooltip'
-function BoardBar(props) {
+function BoardBar() {
   return (
     <Box
       px={2}
@@ -22,7 +22,6 @@ function BoardBar(props) {
         justifyContent: 'space-between',
         overflowX: 'auto',
         gap: 2,
-        borderBottom: '1px solid #fff',
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#30495e' : '#1976d2')
       }}
     >
@@ -135,7 +134,12 @@ function BoardBar(props) {
               width: '30px',
               height: '30px',
               fontSize: '16px',
-              border: 'none'
+              border: 'none',
+              color: 'white',
+              cursor: 'pointer',
+              '&:first-of-type': {
+                bgcolor: '#a4b0de'
+              }
             }
           }}
         >

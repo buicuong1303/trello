@@ -18,8 +18,25 @@ import Typography from '@mui/material/Typography'
 import { useState } from 'react'
 import { BOARD_CONTENT_HEIGHT, COLUMN_FOOTER_HEIGHT, COLUMN_HEADER_HEIGHT } from '~/theme'
 import ListCards from './ListCards'
+import { mapOrder } from '~/utils/sorts'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+type Props = {
+  column: any
+}
+function Column({ column }: Props) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({
+    id: column._id,
+    data: { ...column }
+  })
+  const dndColumnStyle = {
+    // Dùng CSS.Translate để không bị zoom out/int card khi kéo thả
+    transform: CSS.Translate.toString(transform),
+    transition
+    // touchAction: 'none'// Danh cho pointer sensor
+  }
 
-function Column() {
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: any) => {
@@ -39,6 +56,10 @@ function Column() {
         height: 'fit-content',
         maxHeight: (theme) => `calc(${BOARD_CONTENT_HEIGHT} - ${theme.spacing(5)})`
       }}
+      ref={setNodeRef}
+      style={dndColumnStyle}
+      {...attributes}
+      {...listeners}
     >
       {/* header */}
       <Box
@@ -58,7 +79,7 @@ function Column() {
             cursor: 'pointer'
           }}
         >
-          Column title
+          {column.title}
         </Typography>
         <Box>
           <Tooltip title='More options'>
@@ -122,7 +143,7 @@ function Column() {
         </Box>
       </Box>
       {/* card list */}
-      <ListCards />
+      <ListCards cards={orderedCards} />
       {/* footer  */}
       <Box
         sx={{

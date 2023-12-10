@@ -2,7 +2,8 @@ import Container from '@mui/material/Container'
 import AppBar from '~/components/AppBar'
 import BoardBar from './BoardBar'
 import BoardContent from './BoardContent'
-function BoardDetail(props) {
+import { mockData } from '~/apis/mock-data'
+function BoardDetail() {
   return (
     <Container
       disableGutters //disable padding
@@ -12,8 +13,8 @@ function BoardDetail(props) {
       }}
     >
       <AppBar />
-      <BoardBar />
-      <BoardContent />
+      <BoardBar board={mockData.board} />
+      <BoardContent board={mockData.board} />
     </Container>
   )
 }

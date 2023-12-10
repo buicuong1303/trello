@@ -1,7 +1,10 @@
 import Box from '@mui/material/Box'
 import Card from './Card'
 import { BOARD_CONTENT_HEIGHT, COLUMN_FOOTER_HEIGHT, COLUMN_HEADER_HEIGHT } from '~/theme'
-function ListCards() {
+type Props = {
+  cards: Array<any>
+}
+function ListCards({ cards }: Props) {
   return (
     <Box
       sx={{
@@ -24,8 +27,7 @@ function ListCards() {
         }
       }}
     >
-      <Card />
-      <Card temporaryHideMedia />
+      {cards?.map((card) => <Card key={card._id} card={card} />)}
     </Box>
   )
 }

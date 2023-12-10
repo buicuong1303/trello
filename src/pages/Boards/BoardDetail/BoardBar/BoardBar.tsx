@@ -10,7 +10,10 @@ import BoltIcon from '@mui/icons-material/Bolt'
 import FilterListIcon from '@mui/icons-material/FilterList'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import Tooltip from '@mui/material/Tooltip'
-function BoardBar() {
+type Props = {
+  board: any
+}
+function BoardBar({ board }: Props) {
   return (
     <Box
       px={2}
@@ -28,9 +31,13 @@ function BoardBar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Chip
           icon={<DashboardIcon />}
-          label='acb'
+          label={board.title}
           clickable
           sx={{
+            '& span': {
+              textTransform: 'capitalize'
+            },
+            textTransform: 'capitalize',
             color: 'white',
             bgcolor: 'transparent',
             border: 'none',
@@ -46,9 +53,12 @@ function BoardBar() {
         />
         <Chip
           icon={<VpnLockIcon />}
-          label='Private/public workspace'
+          label={board?.type}
           clickable
           sx={{
+            '& span': {
+              textTransform: 'capitalize'
+            },
             color: 'white',
             bgcolor: 'transparent',
             border: 'none',

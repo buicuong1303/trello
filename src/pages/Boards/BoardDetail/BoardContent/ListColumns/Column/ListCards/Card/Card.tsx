@@ -7,10 +7,25 @@ import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
 type Props = {
   card: any
 }
 function Card({ card }: Props) {
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: card._id,
+    data: { ...card }
+  })
+  const dndCardStyle = {
+    // Dùng CSS.Translate để không bị zoom out/int card khi kéo thả
+    transform: CSS.Translate.toString(transform),
+    transition,
+    border: isDragging ? '1xp solid #2ecc71' : undefined,
+    opacity: isDragging ? '0.5' : undefined
+    // touchAction: 'none'// Danh cho pointer sensor
+  }
+
   const shouldShowCardActions = () => {
     return !!card?.memberIds?.length || !!card?.attachments?.length || !!card?.comments?.length
   }
@@ -22,6 +37,10 @@ function Card({ card }: Props) {
         // mặc đinh card của material ui sẽ set overflow hidden => không xuất hiện thanh scroll
         overflow: 'unset'
       }}
+      ref={setNodeRef}
+      style={dndCardStyle}
+      {...attributes}
+      {...listeners}
     >
       {card?.cover && <CardMedia sx={{ height: 140 }} image={card.cover} />}
       <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>

@@ -29,13 +29,15 @@ function Card({ card }: Props) {
   const shouldShowCardActions = () => {
     return !!card?.memberIds?.length || !!card?.attachments?.length || !!card?.comments?.length
   }
+
   return (
     <CardMui
       sx={{
         cursor: 'pointer',
         boxShadow: '0 1px 1px rgba(0,0,0,0.22)',
         // mặc đinh card của material ui sẽ set overflow hidden => không xuất hiện thanh scroll
-        overflow: 'unset'
+        overflow: card.FE_PlaceholderCard ? 'hidden' : 'unset',
+        height: card.FE_PlaceholderCard ? '0px' : 'unset'
       }}
       ref={setNodeRef}
       style={dndCardStyle}
